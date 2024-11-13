@@ -107,7 +107,7 @@ export default {
 
       const formData = new FormData();
       formData.append("file", this.selectedFile);
-      const ip_dynamic = "http://10.59.104.19:8888/upload/";
+      const ip_dynamic = "http://10.59.101.12:8888/upload/";
       const ip = "http://localhost:8888/upload/";
       try {
         const response = await fetch(ip, {
