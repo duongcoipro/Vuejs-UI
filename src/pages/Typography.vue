@@ -4,8 +4,8 @@
       <div class="md-layout-item">
         <md-card>
           <md-card-header data-background-color="green">
-            <h4 class="title">Material Dashboard Heading</h4>
-            <p class="category">Created using Roboto Font Family</p>
+            <h4 class="title">Tools Master</h4>
+            <p class="category">Created using C# and Python language</p>
           </md-card-header>
           <md-card-content>
             <div id="typography">

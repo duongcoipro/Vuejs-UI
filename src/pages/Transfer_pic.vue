@@ -92,6 +92,7 @@
 
 <script>
 import { Alert } from "@/components";
+import {ip} from "../pages/index";
 
 export default {
   components: {
@@ -128,10 +129,8 @@ export default {
       this.selectedFiles.forEach((file) => {
         formData.append("file", file);
       });
-      const ip_dynamic = "http://10.59.101.12:8888/upload/";
-      const ip = "http://localhost:8888/upload/";
       try {
-        const response = await fetch(ip_dynamic, {
+        const response = await fetch(ip, {
           method: "POST",
           body: formData,
         });
@@ -159,13 +158,13 @@ export default {
     },
     async fetchFiles() {
       try {
-        const response = await fetch("http://10.59.101.12:8888/files/");
+        const response = await fetch(`http://${ip}/files/`);
         this.files = await response.json();
         // Tạo URL cho mỗi tệp ảnh
         this.files.forEach((file) => {
           const fileType = file.name.split(".").pop().toLowerCase();
           // Tạo URL từ API mới
-          const imageUrl = `http://10.59.101.12:8888/files/${file.name}`;
+          const imageUrl = `http://${ip}/files/${file.name}`;
           this.$set(this.imagePreviews, file.name, imageUrl);
         });
       } catch (error) {
@@ -176,7 +175,7 @@ export default {
     async Downloadfile(fileName) {
       try {
         const response = await fetch(
-          `http://10.59.101.12:8888/download/${fileName}`,
+          `http://${ip}/download/${fileName}`,
           {
             method: "GET",
           }

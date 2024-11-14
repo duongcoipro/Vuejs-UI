@@ -6,7 +6,7 @@
 
     <md-card-content>
       <h6 class="category text-gray">CEO / Co-Founder</h6>
-      <h4 class="card-title">Alec Thompson</h4>
+      <h4 class="card-title">Lê Đại Dương</h4>
       <p class="card-description">
         Don't be scared of the truth because we need to restart the human
         foundation in truth And I love you like Kanye loves Kanye I love Rick
@@ -22,7 +22,7 @@ export default {
   props: {
     cardUserImage: {
       type: String,
-      default: require("@/assets/img/faces/marc.jpg"),
+      default: require("@/assets/img/faces/duong.jpg"),
     },
   },
   data() {
