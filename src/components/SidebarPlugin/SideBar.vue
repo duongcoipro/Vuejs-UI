@@ -54,7 +54,7 @@ export default {
     },
     imgLogo: {
       type: String,
-      default: require("@/assets/img/new_logo.png"),
+      default: require("@/assets/img/gamer.png"),
     },
     sidebarItemColor: {
       type: String,

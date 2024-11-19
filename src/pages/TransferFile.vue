@@ -108,7 +108,7 @@ export default {
       const formData = new FormData();
       formData.append("file", this.selectedFile);
       const ip_dynamic = "http://10.59.101.12:8888/upload/";
-      const ip = "http://localhost:8888/upload/";
+      const ip = "http://10.59.101.12:8888/upload/";
       try {
         const response = await fetch(ip, {
           method: "POST",
@@ -138,7 +138,7 @@ export default {
     },
     async fetchFiles() {
       try {
-        const response = await fetch("http://localhost:8888/files/");
+        const response = await fetch("http://10.59.101.12:8888/files/");
         this.files = await response.json();
       } catch (error) {
         //console.log('Error fetching files:', error);
@@ -148,7 +148,7 @@ export default {
     async Downloadfile(fileName) {
       try {
         const response = await fetch(
-          `http://localhost:8888/download/${fileName}`,
+          `http://10.59.101.12:8888/download/${fileName}`,
           {
             method: "GET",
           }
