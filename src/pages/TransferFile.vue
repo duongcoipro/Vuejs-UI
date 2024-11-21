@@ -7,7 +7,7 @@
             <h4 class="title">
               <strong>Upload or Download file at here</strong>
             </h4>
-            <p class="category">Created by Diamond flashy</p>
+            <p class="category">Created by Dương còi pro</p>
           </md-card-header>
 
           <md-card-content>
@@ -64,12 +64,6 @@
                   </tr>
                 </tbody>
               </table>
-              <div v-if="isUploading" class="progress-bar-container">
-                <div
-                  class="progress-bar"
-                  :style="{ width: uploadProgress + '%' }"
-                ></div>
-              </div>
             </div>
           </md-card-content>
         </md-card>
@@ -90,8 +84,9 @@ export default {
       files: [],
       selectedFile: null,
       uploadStatus: null,
-      isUploading: false,
-      uploadProgress: 0,
+      value: 50,
+      max: 100,
+      isUploading: true,
     };
   },
   methods: {
@@ -132,8 +127,6 @@ export default {
           type: "danger",
         };
       } finally {
-        this.isUploading = false;
-        this.uploadProgress = 0;
       }
     },
     async fetchFiles() {
@@ -141,11 +134,12 @@ export default {
         const response = await fetch("http://10.59.101.12:8888/files/");
         this.files = await response.json();
       } catch (error) {
-        //console.log('Error fetching files:', error);
+        console.log('Error fetching files:', error);
         //print('Error fetching files:', error);
       }
     },
     async Downloadfile(fileName) {
+      console.log("Response headers:", response.headers);
       try {
         const response = await fetch(
           `http://10.59.101.12:8888/download/${fileName}`,
@@ -156,8 +150,25 @@ export default {
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
-        const blob = await response.blob();
+        console.log("Response headers:", response.headers);
+        const contentLength = response.headers.get("Content-Length");
+        console.log("Content-Length:", contentLength);
+        let receivedBytes = 0;
+        const reader = response.body.getReader();
+        const chunks = [];
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          chunks.push(value);
+          receivedBytes += value.length;
+          //console.log(`Downloaded ${receivedBytes} bytes${contentLength ? ` of ${contentLength}` : ""}`);
+        }
+        //tạo blob và chunk đã tải xuống
+        const blob = new Blob(chunks);
         const url = window.URL.createObjectURL(blob);
+        //const blob = await response.blob();
+        //const url = window.URL.createObjectURL(blob);
+        // tạo nút tải xuống
         const a = document.createElement("a");
         a.href = url;
         a.download = fileName;
